@@ -37,6 +37,8 @@ async function addButtons() {
   });
   // Ajoute le bouton "tous" au HTML
   buttonsContainer.appendChild(allFilterButton);
+  // Ajout de la méthode .focus() pour que le boutton "Tous" soit actif
+  allFilterButton.focus();
 
   // Création d'un objet Set qui prend toute les catégories sans doublons
   const categories = new Set();
