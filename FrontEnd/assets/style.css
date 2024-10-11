@@ -133,6 +133,7 @@ body {
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  background-color: #fffef8;
 }
 header {
   display: flex;
@@ -141,6 +142,11 @@ header {
 }
 section {
   margin: 50px 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 h1 {
@@ -170,12 +176,13 @@ nav ul {
   list-style-type: none;
 }
 nav li {
-  padding: 0 10px;
+  padding: 20px 10px;
   font-size: 1.2em;
 }
 
 li:hover {
   color: #b1663c;
+  cursor: pointer;
 }
 #introduction {
   display: flex;
@@ -258,6 +265,11 @@ input[type="submit"] {
   border-radius: 60px;
 }
 
+footer {
+  height: 60px;
+  background-color: #fff;
+}
+
 footer nav ul {
   display: flex;
   justify-content: flex-end;
@@ -275,7 +287,7 @@ footer nav ul {
 	font-family: "Syne";
 	font-size: 16px;
 	color: #1d6154;
-	background-color: #fff;
+	background-color: #fffef8;
 	border: 1px solid #1d6154;
 	border-radius: 60px;
 	height: 37px;
@@ -283,13 +295,52 @@ footer nav ul {
 	cursor: pointer;
 }
 
-button:hover {
+.buttonsContainer button:hover {
 	background-color: #1d6154;
-	color: #fff;
+	color: #fffef8;
 }
 
-button:focus {
+.buttonsContainer button:focus {
 	background-color: #1d6154;
-	color: #fff;
+	color: #fffef8;
   outline: none;
+}
+
+/* LogIn page css */
+
+.logIn {
+  text-align: center;
+  width: 35%;
+  margin: 150px auto 355px;
+}
+
+.logIn form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.logIn h1 {
+  color: #1d6154;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.logIn input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.logIn label {
+  margin: 2em 0 1em 0;
+}
+
+.logIn p {
+  text-decoration: underline;
+}
+
+#loginNav {
+  font-weight: bold;
 }
