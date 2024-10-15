@@ -4,7 +4,6 @@ Affichage des projets
 
 */
 
-
 // Fonction pour récupérer les projets sur l'API avec fetch
 async function fetchWorks() {
   try {
@@ -70,31 +69,42 @@ fetchWorks().then(function (works) {
   }
 });
 
+// Déconnexion
 
-
-/*
-
-Déconnexion
-
-*/
-
-const logOut = document.getElementById("logOut")
-logOut.addEventListener("click", function() {
+const logOut = document.getElementById("logOut");
+logOut.addEventListener("click", function () {
   if (localStorage.getItem("logToken")) {
     localStorage.removeItem("logToken");
   }
-})
+});
 
-/*
+//  Affichage des éléments présents en mode edit
 
-  Affichage des éléments présents en mode edit
-
-*/
-
-const editModeElements = document.querySelectorAll(".editMode")
+const editModeElements = document.querySelectorAll(".editMode");
 editModeElements.forEach(function (element) {
   if (localStorage.getItem("logToken")) {
-    element.classList.toggle("hide")
+    element.classList.toggle("hide");
   }
-})
+});
 
+// Gestion de l'ouverture de la fermeture de la modal d'édition
+
+const modal = document.querySelector(".modal");
+const modalContainer = document.querySelector(".modalContainer");
+const closeModalButton = document.querySelector(".closeButton");
+const openModalButton = document.querySelector(".modify");
+// Ouverture
+openModalButton.addEventListener("click", function () {
+  document.querySelector(".modal").classList.remove("hide");
+});
+// Fermeture sur le bouton
+closeModalButton.addEventListener("click", function () {
+  document.querySelector(".modal").classList.add("hide");
+});
+// Fermeture en dehors de la modal
+modal.addEventListener("click", function (event) {
+  const modalContainer = document.querySelector(".modalContainer");
+  if (!modalContainer.contains(event.target)) {
+    modal.classList.add("hide");
+  }
+});

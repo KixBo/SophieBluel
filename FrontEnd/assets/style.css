@@ -372,10 +372,6 @@ footer nav ul {
   cursor: pointer;
 }
 
-.hide {
-  display: none;
-}
-
 /* Modal */
 
 .modal {
@@ -395,7 +391,8 @@ footer nav ul {
   flex-direction: column;
   align-items: center;
   background-color: #FFF;
-  width: 40%;
+  width: 45%;
+  min-width: 630px;
   border-radius: 10px;
 }
 
@@ -451,4 +448,8 @@ hr {
   width: 240px;
   margin-bottom: 45px;
   border: none;
+}
+
+.hide {
+  display: none;
 }
