@@ -21,7 +21,7 @@ loginForm.addEventListener("submit", async function (event) {
     if (response.ok) {
       // Stocke le token d'authentification dans le localstorage
       const responseJson = await response.json();
-      window.localStorage.setItem("logToken", responseJson.token);
+      localStorage.setItem("logToken", responseJson.token);
       // Redirection
       window.location.href = "index.html";
     } else {

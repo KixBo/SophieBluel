@@ -1,3 +1,10 @@
+/*
+
+Affichage des projets
+
+*/
+
+
 // Fonction pour récupérer les projets sur l'API avec fetch
 async function fetchWorks() {
   try {
@@ -62,3 +69,32 @@ fetchWorks().then(function (works) {
     buttonsContainer.appendChild(filterButton);
   }
 });
+
+
+
+/*
+
+Déconnexion
+
+*/
+
+const logOut = document.getElementById("logOut")
+logOut.addEventListener("click", function() {
+  if (localStorage.getItem("logToken")) {
+    localStorage.removeItem("logToken");
+  }
+})
+
+/*
+
+  Affichage des éléments présents en mode edit
+
+*/
+
+const editModeElements = document.querySelectorAll(".editMode")
+editModeElements.forEach(function (element) {
+  if (localStorage.getItem("logToken")) {
+    element.classList.toggle("hide")
+  }
+})
+
