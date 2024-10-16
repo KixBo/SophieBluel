@@ -87,24 +87,45 @@ editModeElements.forEach(function (element) {
   }
 });
 
-// Gestion de l'ouverture de la fermeture de la modal d'édition
+// Gestion des modales d'éditions
 
-const modal = document.querySelector(".modal");
-const modalContainer = document.querySelector(".modalContainer");
-const closeModalButton = document.querySelector(".closeButton");
+const modal1 = document.getElementById("modal1");
+const modal2 = document.getElementById("modal2");
+const modal1Container = document.getElementById("modal1Container");
+const modal2Container = document.getElementById("modal2Container");
+const closeModalButton = document.querySelectorAll(".closeButton");
 const openModalButton = document.querySelector(".modify");
-// Ouverture
+const openModal2Button = document.querySelector(".openModal2");
+const previousButton = document.querySelector(".previousButton");
+// Ouverture modal1
 openModalButton.addEventListener("click", function () {
-  document.querySelector(".modal").classList.remove("hide");
+  modal1.classList.remove("hide");
+});
+// Ouverture modale2
+openModal2Button.addEventListener("click", function () {
+  modal1.classList.add("hide");
+  modal2.classList.remove("hide");
+});
+// Retour à la modale1
+previousButton.addEventListener("click", function () {
+  modal1.classList.remove("hide");
+  modal2.classList.add("hide");
 });
 // Fermeture sur le bouton
-closeModalButton.addEventListener("click", function () {
-  document.querySelector(".modal").classList.add("hide");
+closeModalButton.forEach(function (button) {
+  button.addEventListener("click", function () {
+    modal1.classList.add("hide");
+    modal2.classList.add("hide");
+  });
 });
 // Fermeture en dehors de la modal
-modal.addEventListener("click", function (event) {
-  const modalContainer = document.querySelector(".modalContainer");
-  if (!modalContainer.contains(event.target)) {
-    modal.classList.add("hide");
+modal1.addEventListener("click", function (event) {
+  if (!modal1Container.contains(event.target)) {
+    modal1.classList.add("hide");
+  }
+});
+modal2.addEventListener("click", function (event) {
+  if (!modal2Container.contains(event.target)) {
+    modal2.classList.add("hide");
   }
 });

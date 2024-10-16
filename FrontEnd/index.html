@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="./js/script.js" defer></script>
   </head>
-
   <body>
     <div class="banner editMode hide">
       <i class="fa-regular fa-pen-to-square"></i>
@@ -62,14 +61,11 @@
               <p>modifier</p>
             </button>
           </div>
-          
-          <!-- Modal -->
-
-
-          <div class="modal hide">
-            <div class="modalContainer">
+          <!-- Modal1 -->
+          <div id="modal1" class="modal hide">
+            <div id="modal1Container" class="modalContainer">
               <div class="closeButtonContainer">
-                <button class="closeButton"><i class="fa-solid fa-x"></i></butto>
+                <button class="closeButton buttonIconModal"><i class="fa-solid fa-x"></i></butto>
               </div>
               <h3>Galerie photo</h3>
               <div class="photosContainer">
@@ -86,14 +82,38 @@
                 <img src="./assets/images/abajour-tahina.png">
               </div>
               <hr>
-              <button class="addPhoto">Ajouter une photo</button>
+              <button class="buttonModal openModal2">Ajouter une photo</button>
             </div>
           </div>
-
-
-
-
-
+          <!-- Modal2 -->
+          <div id="modal2" class="modal hide">
+            <div id="modal2Container" class="modalContainer">
+              <div class="closeButtonContainer2">
+                <button class="previousButton buttonIconModal"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="closeButton buttonIconModal"><i class="fa-solid fa-x"></i></butto>
+              </div>
+              <h3>Ajout photo</h3>
+              <form action="" method="" class="addWorksForm">
+                <label for="photoInput" class="photoUpload">
+                    <i class="fa-regular fa-image"></i>
+                    <div class="addPhotoUpload">+ Ajouter photo</div>
+                    <p>jpg, png : 4mo max</p>
+                </label>
+                <input type="file" id="photoInput" class="hide">
+                <label for="title" class="labelAddWorksForm">Titre</label>
+                <input type="text" id="title" name="workTitle" class="inputAddWorksForm">
+                <label for="category" class="labelAddWorksForm">Catégorie</label>
+                <select id="category" name="workCategorie" class="inputAddWorksForm">
+                  <option value="" disabled></option>
+                </select>
+                <hr class="hr2">
+                <div class="buttonModalContainer">
+                <button class="buttonModal">Valider</button>
+              </div>
+              </form>
+            </div>
+          </div>
+          <!-- Gallerie -->
           <div class="buttonsContainer editMode"></div>
           <div class="gallery"></div>
         </section>
@@ -112,8 +132,6 @@
         </section>
       </main>
     </div>
-
-
     <footer>
       <nav>
         <ul>

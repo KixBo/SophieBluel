@@ -215,7 +215,7 @@ li:hover {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-	padding-top: 2em;
+  padding-top: 2em;
 }
 
 .gallery img {
@@ -275,32 +275,32 @@ footer nav ul {
 }
 
 .buttonsContainer {
-	width: 585px;
-	display: flex;
-	gap: 10px;
-	margin: 0 auto;
+  width: 585px;
+  display: flex;
+  gap: 10px;
+  margin: 0 auto;
 }
 
 .buttonsContainer button {
-	font-family: "Syne";
-	font-size: 16px;
-	color: #1d6154;
-	background-color: #fffef8;
-	border: 1px solid #1d6154;
-	border-radius: 60px;
-	height: 37px;
-	flex-grow: 1;
-	cursor: pointer;
+  font-family: "Syne";
+  font-size: 16px;
+  color: #1d6154;
+  background-color: #fffef8;
+  border: 1px solid #1d6154;
+  border-radius: 60px;
+  height: 37px;
+  flex-grow: 1;
+  cursor: pointer;
 }
 
 .buttonsContainer button:hover {
-	background-color: #1d6154;
-	color: #fffef8;
+  background-color: #1d6154;
+  color: #fffef8;
 }
 
 .buttonsContainer button:focus {
-	background-color: #1d6154;
-	color: #fffef8;
+  background-color: #1d6154;
+  color: #fffef8;
   outline: none;
 }
 
@@ -348,7 +348,7 @@ footer nav ul {
 .banner {
   width: 100%;
   background-color: #000;
-  color: #FFF;
+  color: #fff;
   height: 59px;
   display: flex;
   justify-content: center;
@@ -372,7 +372,7 @@ footer nav ul {
   cursor: pointer;
 }
 
-/* Modal */
+/* Modal1 */
 
 .modal {
   position: fixed;
@@ -383,30 +383,31 @@ footer nav ul {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3)
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .modalContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #FFF;
+  background-color: #fff;
   width: 45%;
   min-width: 630px;
+  height: 700px;
   border-radius: 10px;
 }
 
 .closeButtonContainer {
   display: flex;
   justify-content: flex-end;
-  padding: 26px 30px 0 0;
   width: 100%;
 }
 
-.closeButton {
+.buttonIconModal {
   border: none;
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
+  margin: 25px;
 }
 
 .modalContainer h3 {
@@ -420,9 +421,10 @@ footer nav ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  row-gap: 30px;
+  row-gap: 20px;
   column-gap: 10px;
   padding: 0 100px;
+  overflow: auto;
 }
 
 .photosContainer img {
@@ -432,12 +434,12 @@ footer nav ul {
 hr {
   border: none;
   height: 1px;
-  background-color: #B3B3B3;
+  background-color: #b3b3b3;
   width: calc(100% - 200px);
-  margin: 65px 0 40px 0;
+  margin: 40px 0 40px 0;
 }
 
-.addPhoto {
+.buttonModal {
   font-family: "Syne";
   font-weight: 700;
   color: white;
@@ -446,9 +448,84 @@ hr {
   border-radius: 60px;
   height: 36px;
   width: 240px;
-  margin-bottom: 45px;
   border: none;
+  cursor: pointer;
 }
+
+/* Modal2 */
+
+.closeButtonContainer2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fa-arrow-left {
+  font-size: 18px;
+}
+
+.addWorksForm {
+  width: 68%;
+}
+
+.photoUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: #e8f1f6;
+  padding: 20px 0;
+  cursor: pointer;
+}
+
+.fa-image {
+  font-size: 76px;
+  color: #b9c5cc;
+}
+
+.addPhotoUpload {
+  background-color: #cbd6dc;
+  color: #306685;
+  height: 36px;
+  width: 41%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.inputAddWorksForm {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  width: 100%;
+  text-align: center;
+}
+
+.labelAddWorksForm {
+  display: block;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.hr2 {
+  border: none;
+  height: 1px;
+  background-color: #b3b3b3;
+  width: calc(100% - 200px);
+  margin: 40px 0 40px 0;
+  width: 100%;
+}
+
+.buttonModalContainer {
+  display: flex;
+  justify-content: center;
+}
+
+/* Display none */
 
 .hide {
   display: none;
