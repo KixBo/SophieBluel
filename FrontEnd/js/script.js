@@ -97,7 +97,7 @@ const closeModalButton = document.querySelectorAll(".closeButton");
 const openModalButton = document.querySelector(".modify");
 const openModal2Button = document.querySelector(".openModal2");
 const previousButton = document.querySelector(".previousButton");
-// Ouverture modal1
+// Ouverture modale1
 openModalButton.addEventListener("click", function () {
   modal1.classList.remove("hide");
 });
@@ -118,7 +118,7 @@ closeModalButton.forEach(function (button) {
     modal2.classList.add("hide");
   });
 });
-// Fermeture en dehors de la modal
+// Fermeture en dehors de la modale
 modal1.addEventListener("click", function (event) {
   if (!modal1Container.contains(event.target)) {
     modal1.classList.add("hide");
@@ -128,4 +128,15 @@ modal2.addEventListener("click", function (event) {
   if (!modal2Container.contains(event.target)) {
     modal2.classList.add("hide");
   }
+});
+
+// Ajout dynamique des projets à la modale1
+
+fetchWorks().then(function (works) {
+const galleryModal1 = document.querySelector(".photosContainer");
+galleryModal1.innerHTML = "";
+for (let i = 0; i < works.length; i++) {
+  galleryModal1.innerHTML += `<div class="photoContainer"><img src="${works[i].imageUrl}" alt="${works[i].title}">
+  <button><i class="fa-solid fa-trash-can"></i></button></div>`
+}
 });

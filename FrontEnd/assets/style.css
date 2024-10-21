@@ -420,15 +420,10 @@ footer nav ul {
 .photosContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   row-gap: 20px;
   column-gap: 10px;
   padding: 0 100px;
   overflow: auto;
-}
-
-.photosContainer img {
-  width: calc(20% - 10px);
 }
 
 hr {
@@ -450,6 +445,34 @@ hr {
   width: 240px;
   border: none;
   cursor: pointer;
+}
+
+.photoContainer {
+  position: relative;
+  width: calc(20% - 10px);
+}
+
+.photoContainer img {
+  width: 100%;
+}
+
+.photoContainer button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 17px;
+  height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 2px;
+  background-color: #000;
+}
+
+.fa-trash-can {
+  font-size: 10px;
+  color: #fff;
 }
 
 /* Modal2 */
@@ -523,6 +546,10 @@ hr {
 .buttonModalContainer {
   display: flex;
   justify-content: center;
+}
+
+.buttonValidateModal2 {
+  background-color: #A7A7A7;
 }
 
 /* Display none */
