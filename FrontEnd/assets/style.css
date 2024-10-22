@@ -500,6 +500,7 @@ hr {
   background-color: #e8f1f6;
   padding: 20px 0;
   cursor: pointer;
+  position: relative;
 }
 
 .fa-image {
@@ -551,6 +552,13 @@ hr {
 
 .buttonValidateModal2 {
   background-color: #A7A7A7;
+}
+
+#previewPhoto {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Display none */

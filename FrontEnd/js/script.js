@@ -130,7 +130,6 @@ modal2.addEventListener("click", function (event) {
   }
 });
 
-
 // Modale 1 (suppression)
 
 fetchWorks().then(function (works) {
@@ -179,17 +178,32 @@ async function deleteWorks(id) {
   }
 }
 
-
 // Modal 2 (ajout)
 
 // Ajout dynamique des catégories
 
 async function getCategories() {
-  const response = await fetch("http://localhost:5678/api/categories")
-  const categories = await response.json()
-  const inputCategories = document.getElementById("category")
+  const response = await fetch("http://localhost:5678/api/categories");
+  const categories = await response.json();
+  const categoriesInput = document.getElementById("category");
   for (const category of categories) {
-    inputCategories.innerHTML += `<option value="${category.id}">${category.name}</option>`
+    categoriesInput.innerHTML += `<option value="${category.id}">${category.name}</option>`;
   }
 }
-getCategories()
+getCategories();
+
+// Prévisualisation de la photo dans le formulare d'ajout
+
+const photoInput = document.getElementById("photoInput");
+photoInput.addEventListener("change", function (event) {
+  const photo = event.target.files[0];
+  if (photo) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const previewPhoto = document.getElementById("previewPhoto");
+      previewPhoto.src = event.target.result;
+      previewPhoto.classList.remove("hide")
+    };
+    reader.readAsDataURL(photo);
+  }
+});
