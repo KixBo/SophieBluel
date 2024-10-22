@@ -130,6 +130,9 @@ modal2.addEventListener("click", function (event) {
   }
 });
 
+
+// Modale 1 (suppression)
+
 fetchWorks().then(function (works) {
   addWorks(works);
   addWorksModal(works);
@@ -175,3 +178,18 @@ async function deleteWorks(id) {
     console.error("Erreur réseau ou autre", error);
   }
 }
+
+
+// Modal 2 (ajout)
+
+// Ajout dynamique des catégories
+
+async function getCategories() {
+  const response = await fetch("http://localhost:5678/api/categories")
+  const categories = await response.json()
+  const inputCategories = document.getElementById("category")
+  for (const category of categories) {
+    inputCategories.innerHTML += `<option value="${category.id}">${category.name}</option>`
+  }
+}
+getCategories()
