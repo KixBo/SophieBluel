@@ -468,6 +468,7 @@ hr {
   border: none;
   border-radius: 2px;
   background-color: #000;
+  cursor: pointer;
 }
 
 .fa-trash-can {

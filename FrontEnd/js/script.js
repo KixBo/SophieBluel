@@ -130,13 +130,48 @@ modal2.addEventListener("click", function (event) {
   }
 });
 
+fetchWorks().then(function (works) {
+  addWorks(works);
+  addWorksModal(works);
+});
+
 // Ajout dynamique des projets à la modale1
 
-fetchWorks().then(function (works) {
-const galleryModal1 = document.querySelector(".photosContainer");
-galleryModal1.innerHTML = "";
-for (let i = 0; i < works.length; i++) {
-  galleryModal1.innerHTML += `<div class="photoContainer"><img src="${works[i].imageUrl}" alt="${works[i].title}">
-  <button><i class="fa-solid fa-trash-can"></i></button></div>`
+function addWorksModal(works) {
+  const galleryModal1 = document.querySelector(".photosContainer");
+  galleryModal1.innerHTML = "";
+  for (let i = 0; i < works.length; i++) {
+    galleryModal1.innerHTML += `<div class="photoContainer"><img src="${works[i].imageUrl}" alt="${works[i].title}">
+  <button class="deleteButton" data-id="${works[i].id}"><i class="fa-solid fa-trash-can"></i></button></div>`;
+  }
+  const deleteButtons = document.querySelectorAll(".deleteButton");
+  deleteButtons.forEach(function (button) {
+    button.addEventListener("click", async function (event) {
+      const id = event.currentTarget.dataset.id;
+      await deleteWorks(id);
+    });
+  });
 }
-});
+
+// Fonction pour supprimer les projets via l'API
+async function deleteWorks(id) {
+  try {
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("logToken")}`,
+      },
+    });
+    if (response.ok) {
+      const updatedWorks = await fetchWorks();
+      addWorks(updatedWorks);
+      addWorksModal(updatedWorks);
+      alert("Projet supprimé avec succès.");
+    } else {
+      console.error("Erreur lors de la suppression du projet");
+    }
+  } catch (error) {
+    console.error("Erreur réseau ou autre", error);
+  }
+}
