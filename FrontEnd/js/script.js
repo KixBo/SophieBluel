@@ -202,8 +202,60 @@ photoInput.addEventListener("change", function (event) {
     reader.onload = function (event) {
       const previewPhoto = document.getElementById("previewPhoto");
       previewPhoto.src = event.target.result;
-      previewPhoto.classList.remove("hide")
+      previewPhoto.classList.remove("hide");
     };
     reader.readAsDataURL(photo);
+  }
+});
+
+// Gestion de l'ajout des travaux
+
+const addWorksForm = document.querySelector(".addWorksForm");
+
+// Change la couleur du bouton de validation quand tous les input sont remplis
+
+addWorksForm.addEventListener("input", function () {
+  const workPhoto = document.getElementById("photoInput").files[0];
+  const workTitle = document.getElementById("title").value;
+  const workCategory = document.getElementById("category").value;
+  const validateButton = document.querySelector(".buttonValidateModal2");
+  if (workPhoto && workTitle && workCategory) {
+    validateButton.classList.add("green");
+  } else {
+    validateButton.classList.remove("green");
+  }
+});
+
+// Soumission du formulaire d'ajout
+
+addWorksForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const workPhoto = document.getElementById("photoInput").files[0];
+  const workTitle = document.getElementById("title").value;
+  const workCategory = parseInt(document.getElementById("category").value);
+  if (!workPhoto || !workTitle || !workCategory) {
+    alert("Attention, tous les champs sont requis !");
+    return;
+  }
+  const formData = new FormData();
+  formData.append("title", workTitle);
+  formData.append("image", workPhoto);
+  formData.append("category", workCategory);
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${localStorage.getItem("logToken")}` },
+      body: formData,
+    });
+    if (response.ok) {
+      alert("Projet ajouté avec succès.");
+      const updatedWorks = await fetchWorks();
+      addWorks(updatedWorks);
+      addWorksModal(updatedWorks);
+    } else {
+      alert("Une erreur est survenu lors de l'ajout. Veuillez réessayer.");
+    }
+  } catch (error) {
+    alert("Un problème est survenu. Veuillez réessayer plus tard.");
   }
 });

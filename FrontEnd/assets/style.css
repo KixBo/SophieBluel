@@ -563,6 +563,10 @@ hr {
 
 /* Display none */
 
+.green {
+  background-color: #1d6154;
+}
+
 .hide {
   display: none;
 }
