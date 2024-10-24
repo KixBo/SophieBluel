@@ -28,7 +28,6 @@ loginForm.addEventListener("submit", async function (event) {
       alert("Email ou mot de passe incorrect. Veuillez réessayer.");
     }
   } catch (error) {
-    console.error(error.message);
     alert("Un problème est survenu. Veuillez réessayer plus tard.");
   }
 });
