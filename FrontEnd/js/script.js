@@ -236,6 +236,7 @@ addWorksForm.addEventListener("submit", async function (event) {
       const updatedWorks = await fetchWorks();
       displayWorks(updatedWorks);
       displayWorksModal(updatedWorks);
+      modal2.classList.add("hide");
     } else {
       alert("Une erreur est survenu lors de l'ajout. Veuillez réessayer.");
     }
