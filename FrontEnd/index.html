@@ -39,7 +39,7 @@
         </nav>
       </header>
       <main>
-        <section id="introduction">
+        <div id="introduction">
           <figure>
             <img src="./assets/images/sophie-bluel.png" alt="" />
           </figure>
@@ -52,13 +52,13 @@
             </p>
             <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
           </article>
-        </section>
+        </div>
         <section id="portfolio">
           <div class="projectTitleContainer">
             <h2>Mes Projets</h2>
             <button class="modify editMode hide">
               <i class="fa-regular fa-pen-to-square"></i>
-              <p>modifier</p>
+              <span>modifier</span>
             </button>
           </div>
           <!-- Modal1 -->
@@ -68,9 +68,8 @@
                 <button class="closeButton buttonIconModal"><i class="fa-solid fa-x"></i></button>
               </div>
               <h3>Galerie photo</h3>
-              <div class="photosContainer">
-              </div>
-              <hr>
+              <div class="photosContainer"></div>
+              <hr />
               <button class="buttonModal openModal2">Ajouter une photo</button>
             </div>
           </div>
@@ -79,27 +78,27 @@
             <div id="modal2Container" class="modalContainer">
               <div class="closeButtonContainer2">
                 <button class="previousButton buttonIconModal"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="closeButton buttonIconModal"><i class="fa-solid fa-x"></i></butto>
+                <button class="closeButton buttonIconModal"><i class="fa-solid fa-x"></i></button>
               </div>
               <h3>Ajout photo</h3>
-              <form action="" method="" class="addWorksForm">
+              <form class="addWorksForm">
                 <label for="photoInput" class="photoUpload">
-                    <i class="fa-regular fa-image"></i>
-                    <div class="addPhotoUpload">+ Ajouter photo</div>
-                    <p>jpg, png : 4mo max</p>
-                    <img src="" alt="Photo preview" id="previewPhoto" class="hide">
+                  <i class="fa-regular fa-image"></i>
+                  <span class="addPhotoUpload">+ Ajouter photo</span>
+                  <span>jpg, png : 4mo max</span>
+                  <img src="#" alt="Photo preview" id="previewPhoto" class="hide" />
                 </label>
-                <input type="file" accept=".jpg, .png" id="photoInput" class="hide">
+                <input type="file" accept=".jpg, .png" id="photoInput" class="hide" />
                 <label for="title" class="labelAddWorksForm">Titre</label>
-                <input type="text" id="title" name="workTitle" class="inputAddWorksForm">
+                <input type="text" id="title" name="workTitle" class="inputAddWorksForm" />
                 <label for="category" class="labelAddWorksForm">Catégorie</label>
                 <select id="category" name="workCategorie" class="inputAddWorksForm">
-                  <option value="" selected></option>
+                  <option value="" selected>&nbsp;</option>
                 </select>
-                <hr class="hr2">
+                <hr class="hr2" />
                 <div class="buttonModalContainer">
-                <button class="buttonModal buttonValidateModal2">Valider</button>
-              </div>
+                  <button class="buttonModal buttonValidateModal2">Valider</button>
+                </div>
               </form>
             </div>
           </div>
