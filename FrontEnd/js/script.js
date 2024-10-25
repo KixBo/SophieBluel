@@ -130,16 +130,15 @@ function displayWorksModal(works) {
     galleryModal1.innerHTML += `<div class="photoContainer"><img src="${works[i].imageUrl}" alt="${works[i].title}">
   <button class="deleteButton" data-id="${works[i].id}"><i class="fa-solid fa-trash-can"></i></button></div>`;
   }
-}
-
-// Fonctionnalité des boutons de suppression
-const deleteButtons = document.querySelectorAll(".deleteButton");
-deleteButtons.forEach(function (button) {
-  button.addEventListener("click", async function (event) {
-    const id = event.currentTarget.dataset.id;
-    await deleteWorks(id);
+  // Fonctionnalité des boutons de suppression
+  const deleteButtons = document.querySelectorAll(".deleteButton");
+  deleteButtons.forEach(function (button) {
+    button.addEventListener("click", async function (event) {
+      const id = event.currentTarget.dataset.id;
+      deleteWorks(id);
+    });
   });
-});
+}
 
 // Fonction pour supprimer les projets via l'API
 async function deleteWorks(id) {
