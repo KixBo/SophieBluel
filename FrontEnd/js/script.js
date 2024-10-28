@@ -1,7 +1,10 @@
-// Affichage des projets
+// Tableau pour stocker les projets
+let works = [];
 
-fetchWorks().then(function (works) {
-  displayWorks(works);
+// Récupération des projets depuis l'API et affichage
+fetchWorks().then(function (fetchedWorks) {
+  works = fetchedWorks;
+  displayWorksGallery(works);
   setupFilterButtons(works);
   displayWorksModal(works);
 });
@@ -10,23 +13,28 @@ fetchWorks().then(function (works) {
 async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
-    const works = await response.json();
-    return works;
+    return await response.json();
   } catch (error) {
     alert("Un problème est survenu. Veuillez réessayer plus tard.");
   }
 }
 
-// Fonction pour afficher les projets à la galerie
-function displayWorks(works) {
+// Fonction pour afficher tous les projets à la galerie
+function displayWorksGallery(works) {
   const gallery = document.querySelector(".gallery");
   gallery.innerHTML = "";
-  for (let i = 0; i < works.length; i++) {
-    gallery.innerHTML += `<figure>
-      <img src="${works[i].imageUrl}" alt="${works[i].title}">
-			<figcaption>${works[i].title}</figcaption>
-    </figure>`;
-  }
+  works.forEach(displaySingleWork);
+}
+
+// Fonction pour afficher un projet individuel
+function displaySingleWork(work) {
+  const gallery = document.querySelector(".gallery");
+  const figure = document.createElement("figure");
+  figure.innerHTML = `
+    <img src="${work.imageUrl}" alt="${work.title}">
+    <figcaption>${work.title}</figcaption>
+  `;
+  gallery.appendChild(figure);
 }
 
 // Fonction pour créer les boutons de filtres
@@ -39,7 +47,7 @@ function setupFilterButtons(works) {
   defaultFilterButton.focus();
   // Fonctionnalité au clic
   defaultFilterButton.addEventListener("click", function () {
-    displayWorks(works);
+    displayWorksGallery(works);
   });
   // Création d'un bouton pour chaque catégorie
   const categories = new Set();
@@ -55,7 +63,7 @@ function setupFilterButtons(works) {
       const filteredWorks = works.filter(function (work) {
         return work.category.name === category;
       });
-      displayWorks(filteredWorks);
+      displayWorksGallery(filteredWorks);
     });
     buttonsContainer.appendChild(filterButton);
   }
@@ -122,21 +130,25 @@ modal2.addEventListener("click", function (event) {
 
 // Gestion de la modale 1 (suppression de projets)
 
-// Fonction pour afficher les projets dans la modale
+// Fonction pour afficher tous les projets dans la modale
 function displayWorksModal(works) {
   const galleryModal1 = document.querySelector(".photosContainer");
   galleryModal1.innerHTML = "";
-  for (let i = 0; i < works.length; i++) {
-    galleryModal1.innerHTML += `<div class="photoContainer"><img src="${works[i].imageUrl}" alt="${works[i].title}">
-  <button class="deleteButton" data-id="${works[i].id}"><i class="fa-solid fa-trash-can"></i></button></div>`;
-  }
-  // Fonctionnalité des boutons de suppression
-  const deleteButtons = document.querySelectorAll(".deleteButton");
-  deleteButtons.forEach(function (button) {
-    button.addEventListener("click", async function (event) {
-      const id = event.currentTarget.dataset.id;
-      deleteWorks(id);
-    });
+  works.forEach((work) => displaySingleWorkModal(work));
+}
+
+// Fonction pour afficher un seul projet dans la modale
+function displaySingleWorkModal(work) {
+  const galleryModal1 = document.querySelector(".photosContainer");
+  const div = document.createElement("div");
+  div.classList.add("photoContainer");
+  div.innerHTML = `
+    <img src="${work.imageUrl}" alt="${work.title}">
+    <button class="deleteButton" data-id="${work.id}"><i class="fa-solid fa-trash-can"></i></button>`;
+  galleryModal1.appendChild(div);
+  // Ajout de l'événement de suppression au bouton
+  div.querySelector(".deleteButton").addEventListener("click", async function () {
+    await deleteWorks(work.id);
   });
 }
 
@@ -151,9 +163,12 @@ async function deleteWorks(id) {
       },
     });
     if (response.ok) {
-      const updatedWorks = await fetchWorks();
-      displayWorks(updatedWorks);
-      displayWorksModal(updatedWorks);
+      works = works.filter(function (work) {
+        return work.id !== id;
+      });
+      displayWorksGallery(works);
+      displayWorksModal(works);
+      modal1.classList.add("hide");
       alert("Projet supprimé avec succès.");
     } else {
       alert("Erreur lors de la suppression du projet");
@@ -164,21 +179,6 @@ async function deleteWorks(id) {
 }
 
 // Gestion de la modale 2 (ajout de projets)
-
-// Ajout dynamique des catégories
-async function getCategories() {
-  try {
-    const response = await fetch("http://localhost:5678/api/categories");
-    const categories = await response.json();
-    const categoriesInput = document.getElementById("category");
-    for (const category of categories) {
-      categoriesInput.innerHTML += `<option value="${category.id}">${category.name}</option>`;
-    }
-  } catch {
-    alert("Un problème est survenu. Veuillez réessayer plus tard.");
-  }
-}
-getCategories();
 
 // Prévisualisation de la photo dans le formulare d'ajout
 const photoInput = document.getElementById("photoInput");
@@ -194,6 +194,27 @@ photoInput.addEventListener("change", function (event) {
     reader.readAsDataURL(photo);
   }
 });
+
+// Fonction pour récupération les catégories depuis l'API
+async function fetchCategories() {
+  try {
+    const response = await fetch("http://localhost:5678/api/categories");
+    return await response.json();
+  } catch {
+    alert("Un problème est survenu. Veuillez réessayer plus tard.");
+  }
+}
+
+// Fonction pour afficher les catégories dans le formulaire
+async function displayFormCategories() {
+  const categories = await fetchCategories();
+  const categoriesInput = document.getElementById("category");
+  categoriesInput.innerHTML = "";
+  for (const category of categories) {
+    categoriesInput.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+  }
+}
+displayFormCategories();
 
 // Gestion de l'ajout des projets
 
@@ -231,13 +252,14 @@ addWorksForm.addEventListener("submit", async function (event) {
       body: formData,
     });
     if (response.ok) {
-      alert("Projet ajouté avec succès.");
-      const updatedWorks = await fetchWorks();
-      displayWorks(updatedWorks);
-      displayWorksModal(updatedWorks);
+      const newWork = await response.json();
+      works.push(newWork);
+      displayWorksGallery(works);
+      displayWorksModal(works);
       modal2.classList.add("hide");
+      alert("Projet ajouté avec succès.");
     } else {
-      alert("Une erreur est survenu lors de l'ajout. Veuillez réessayer.");
+      alert("Une erreur est survenue lors de l'ajout. Veuillez réessayer.");
     }
   } catch (error) {
     alert("Un problème est survenu. Veuillez réessayer plus tard.");
