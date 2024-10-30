@@ -13,7 +13,7 @@ fetchWorks().then(function (fetchedWorks) {
 async function fetchWorks() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
-    return await response.json();
+    return response.json();
   } catch (error) {
     alert("Un problème est survenu. Veuillez réessayer plus tard.");
   }
